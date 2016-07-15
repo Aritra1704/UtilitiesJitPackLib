@@ -15,9 +15,6 @@ public class StringUtils {
         if(integer == null || TextUtils.isEmpty(integer))
             return reqInteger;
 
-        if(integer.equalsIgnoreCase("null"))
-            return reqInteger;
-
         reqInteger = Integer.parseInt(integer);
 
         return reqInteger;
@@ -27,9 +24,6 @@ public class StringUtils {
         long reqInteger = 0;
 
         if(integer == null || TextUtils.isEmpty(integer))
-            return reqInteger;
-
-        if(integer.equalsIgnoreCase("null"))
             return reqInteger;
 
         reqInteger = Long.parseLong(integer);
@@ -43,24 +37,7 @@ public class StringUtils {
         if(integer == null || TextUtils.isEmpty(integer))
             return reqInteger;
 
-        if(integer.equalsIgnoreCase("null"))
-            return reqInteger;
-
         reqInteger = Float.parseFloat(integer);
-
-        return reqInteger;
-    }
-
-    public static double getDouble(String integer) {
-        double reqInteger = 0;
-
-        if(integer == null || TextUtils.isEmpty(integer))
-            return reqInteger;
-
-        if(integer.equalsIgnoreCase("null"))
-            return reqInteger;
-
-        reqInteger = Double.parseDouble(integer);
 
         return reqInteger;
     }

@@ -10,16 +10,21 @@ import java.util.Date;
  */
 public class CalendarUtils {
     private static final String DATETIME_FORMAT_WITH_COMMA = "dd MMM, yyyy\nhh:mm:ss aa";
-    private static final String DATE_FORMAT_WITH_COMMA = "MMM dd, yyyy";
+    private static final String DATE_FORMAT_WITH_COMMA = "MMMM dd, yyyy";
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy'T'HH:mm:ss";
+    public static final String DATE_TIME_FORMAT1 = "yyyyMMdd'T'HHmmss";
     private static final String DATE_FORMAT = "yyyy MM dd";
-    private static final String DATE_FORMAT1 = "yyyy-MM-dd";
-    private static final String TIME_FORMAT = "hh:mm aa";
+    public static final String DATE_FORMAT1 = "yyyy-MM-dd";
+    public static final String TIME_FORMAT = "hh:mm aa";
+    public static final String TIME_SEC_FORMAT = "hh:mm:ss a";
     private static final String WEEKNAME_FORMAT = "EEE";
     private static final String MONTHNAME_FORMAT = "MMM";
+    private static final String MONTHNAME_FORMAT1 = "MMMM";
     private static final String DAYNAME_FORMAT = "dd";
     private static final String YEARNAME_FORMAT = "yyyy";
     private static final String MONTH_YEAR_FORMAT = "MM-yyyy";
+    private static final String MONTH_YEAR_FORMAT2 = "MMM yyyy";
+    private static final String MONTH_YEAR_FORMAT3 = "MMMM yyyy";
 
     public static String getCommaFormattedDateTime(String dateTime) {
         String reqDate = "";
@@ -81,6 +86,12 @@ public class CalendarUtils {
         if (dateTime.contains("T")){
             String date = dateTime.split("T")[0];
             String str[] = date.split("-");
+
+            calendar.set(Calendar.DAY_OF_MONTH,StringUtils.getInt(str[2]));
+            calendar.set(Calendar.MONTH,StringUtils.getInt(str[1]) - 1);
+            calendar.set(Calendar.YEAR,StringUtils.getInt(str[0]));
+        } else {
+            String str[] = dateTime.split("-");
 
             calendar.set(Calendar.DAY_OF_MONTH,StringUtils.getInt(str[2]));
             calendar.set(Calendar.MONTH,StringUtils.getInt(str[1]) - 1);
@@ -313,6 +324,17 @@ public class CalendarUtils {
         return reqDate;
     }
 
+    public static String getFullMonthNameFromInt(String dateTime) {
+        String reqDate = "";
+
+        Calendar calendar = getCalendarFromString(dateTime);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(MONTHNAME_FORMAT1);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
     public static String getYearNameFromInt(String dateTime) {
         String reqDate = "";
 
@@ -322,6 +344,22 @@ public class CalendarUtils {
         reqDate = simpleDateFormat.format(calendar.getTime());
 
         return reqDate;
+    }
+
+    public static int getHourFromTime(String dateTime) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(CalendarUtils.getDateFromString(dateTime, TIME_FORMAT));
+
+        return calendar.get(Calendar.HOUR_OF_DAY);
+    }
+
+    public static int getMinutesFromTime(String dateTime) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(CalendarUtils.getDateFromString(dateTime, TIME_FORMAT));
+
+        return calendar.get(Calendar.MINUTE);
     }
 
     public static Calendar getCalendarFromString(String dateTime){
@@ -346,5 +384,64 @@ public class CalendarUtils {
         calendar.setTime(CalendarUtils.getDateFromString(dateTime, MONTH_YEAR_FORMAT));
 
         return (calendar.get(Calendar.MONTH) + 1);
+    }
+
+    public static Calendar getCalendarMonthFromString(String dateTime)
+    {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(CalendarUtils.getDateFromString(dateTime, MONTH_YEAR_FORMAT));
+
+        calendar.add(Calendar.MONTH, 1);
+        return calendar;
+    }
+
+    public static String getCalendarMonth(Calendar calendar ) {
+        String reqDate = "";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(MONTH_YEAR_FORMAT3);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
+    public static int getDiffBtwDatesInDays(String todayDate,String selDate)
+    {
+        Calendar todaycal = Calendar.getInstance();
+        Calendar selcal = Calendar.getInstance();
+
+        todaycal.setTime(CalendarUtils.getDateFromString(todayDate, CalendarUtils.DATE_FORMAT1));
+        selcal.setTime(CalendarUtils.getDateFromString(selDate, CalendarUtils.DATE_FORMAT1));
+
+        int diff = 0;
+        if(selcal.get(Calendar.YEAR) < todaycal.get(Calendar.YEAR))
+            diff = -1;
+        else {
+            if(selcal.get(Calendar.MONTH) < todaycal.get(Calendar.MONTH))
+                diff = -1;
+            else {
+                if(selcal.get(Calendar.DAY_OF_MONTH) < todaycal.get(Calendar.DAY_OF_MONTH)) {
+                    if(selcal.get(Calendar.MONTH) > todaycal.get(Calendar.MONTH) ||
+                            selcal.get(Calendar.YEAR) > todaycal.get(Calendar.YEAR))
+                        diff = 1;
+                    else
+                        diff = -1;
+                }
+                else {
+                    diff = 1;
+                }
+            }
+        }
+
+        return diff;
+    }
+
+    public static Calendar getCalendarFromDate(String date, String DATEFORMAT)
+    {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(CalendarUtils.getDateFromString(date, DATEFORMAT));
+
+        return calendar;
     }
 }
