@@ -511,8 +511,33 @@ public class CalendarUtils {
         return calendar;
     }
 
+    /**
+     * Get you date from calendar in desired pattern.
+     * @param calendar
+     * @param pattern
+     * @return
+     */
     public static String getDatefromCalendarPattern(Calendar calendar, String pattern) {
         String reqDate = "";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
+    /**
+     * Get date from time in milies in desired pattern.
+     * @param timeinMilies
+     * @param pattern
+     * @return
+     */
+    public static String getDatefromTimeinMmiliesPattern(long timeinMilies, String pattern) {
+        String reqDate = "";
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTimeInMillis(timeinMilies);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         reqDate = simpleDateFormat.format(calendar.getTime());
