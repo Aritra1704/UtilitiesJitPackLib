@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Aritra on 4/26/2016.
@@ -42,6 +43,17 @@ public class StringUtils {
         return reqInteger;
     }
 
+    public static double getDouble(String integer) {
+        double reqInteger = 0;
+
+        if(integer == null || TextUtils.isEmpty(integer))
+            return reqInteger;
+
+        reqInteger = Double.parseDouble(integer);
+
+        return reqInteger;
+    }
+
     public static String getStringFormattedArray(ArrayList<String> arrString) {
         String eventDate = "";
 
@@ -76,5 +88,15 @@ public class StringUtils {
         mile = getFloat(form.format(mile));
 
         return mile;
+    }
+
+    public static String convertArraylistToString(List<String> list){
+        String listString = "";
+
+        for (String s : list)
+        {
+            listString += "\"" + s + "\",";
+        }
+        return listString;
     }
 }

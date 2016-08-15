@@ -1,5 +1,6 @@
 package com.arpaul.utilitieslib;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,22 +10,24 @@ import java.util.Date;
  * Created by Aritra on 4/26/2016.
  */
 public class CalendarUtils {
-    private static final String DATETIME_FORMAT_WITH_COMMA = "dd MMM, yyyy\nhh:mm:ss aa";
-    private static final String DATE_FORMAT_WITH_COMMA = "MMMM dd, yyyy";
-    private static final String DATE_TIME_FORMAT = "dd-MM-yyyy'T'HH:mm:ss";
+    public static final String DATETIME_FORMAT_WITH_COMMA = "dd MMM, yyyy\nhh:mm:ss aa";
+    public static final String DATE_FORMAT_WITH_COMMA = "MMMM dd, yyyy";
+    public static final String DATE_TIME_FORMAT = "dd-MM-yyyy'T'HH:mm:ss";
     public static final String DATE_TIME_FORMAT1 = "yyyyMMdd'T'HHmmss";
-    private static final String DATE_FORMAT = "yyyy MM dd";
+    public static final String DATE_FORMAT = "yyyy MM dd";
     public static final String DATE_FORMAT1 = "yyyy-MM-dd";
     public static final String TIME_FORMAT = "hh:mm aa";
     public static final String TIME_SEC_FORMAT = "hh:mm:ss a";
-    private static final String WEEKNAME_FORMAT = "EEE";
-    private static final String MONTHNAME_FORMAT = "MMM";
-    private static final String MONTHNAME_FORMAT1 = "MMMM";
-    private static final String DAYNAME_FORMAT = "dd";
-    private static final String YEARNAME_FORMAT = "yyyy";
-    private static final String MONTH_YEAR_FORMAT = "MM-yyyy";
-    private static final String MONTH_YEAR_FORMAT2 = "MMM yyyy";
-    private static final String MONTH_YEAR_FORMAT3 = "MMMM yyyy";
+    public static final String WEEKNAME_FORMAT = "EEE";
+    public static final String MONTHNAME_FORMAT = "MMM";
+    public static final String MONTHNAME_FORMAT1 = "MMMM";
+    public static final String DAYNAME_FORMAT = "dd";
+    public static final String YEARNAME_FORMAT = "yyyy";
+    public static final String MONTH_YEAR_FORMAT = "MM-yyyy";
+    public static final String MONTH_YEAR_FORMAT2 = "MMM yyyy";
+    public static final String MONTH_YEAR_FORMAT3 = "MMMM yyyy";
+
+    public static final String DATE_TIME_FORMAT_UTC = "yyyy-MM-dd HH:mm:ss Z";
 
     public static String getCommaFormattedDateTime(String dateTime) {
         String reqDate = "";
@@ -372,7 +375,7 @@ public class CalendarUtils {
             str = dateTime.split("-");
 
         calendar.set(Calendar.DAY_OF_MONTH,StringUtils.getInt(str[2]));
-        calendar.set(Calendar.MONTH,StringUtils.getInt(str[1]) - 1);
+        calendar.set(Calendar.MONTH, StringUtils.getInt(str[1]) - 1);
         calendar.set(Calendar.YEAR, StringUtils.getInt(str[0]));
         return calendar;
     }
@@ -443,5 +446,77 @@ public class CalendarUtils {
         calendar.setTime(CalendarUtils.getDateFromString(date, DATEFORMAT));
 
         return calendar;
+    }
+
+    public static String getCurrent_Time() {
+        String reqDate = "";
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(TIME_FORMAT);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
+    /**
+     * Get Date in the required pattern.
+     * @param toPattern
+     * @return
+     */
+    public static String getDateinPattern(String toPattern) {
+        String reqDate = "";
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(toPattern);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
+    /**
+     * Get your provided date in required format.
+     * @param dateTime
+     * @param fromPattern
+     * @param toPattern
+     * @return
+     */
+    public static String getDateinPattern(String dateTime, String fromPattern, String toPattern) {
+        String reqDate = "";
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(CalendarUtils.getDateFromString(dateTime, fromPattern));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(toPattern);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
+    /**
+     * Get your Calendar object from desired date.
+     * @param dateTime
+     * @param pattern
+     * @return
+     */
+    public static Calendar getCalendarfromDatePattern(String dateTime, String pattern) {
+        String reqDate = "";
+
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.setTime(CalendarUtils.getDateFromString(dateTime, pattern));
+
+        return calendar;
+    }
+
+    public static String getDatefromCalendarPattern(Calendar calendar, String pattern) {
+        String reqDate = "";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
     }
 }
