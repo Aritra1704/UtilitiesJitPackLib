@@ -93,9 +93,11 @@ public class StringUtils {
     public static String convertArraylistToString(List<String> list){
         String listString = "";
 
-        for (String s : list)
-        {
-            listString += "\"" + s + "\",";
+        if(list != null && list.size() > 0){
+            for (String s : list)
+            {
+                listString += "\"" + s + "\",";
+            }
         }
         return listString;
     }

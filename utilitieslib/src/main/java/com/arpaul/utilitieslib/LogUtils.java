@@ -17,6 +17,10 @@ import java.io.InputStreamReader;
 public class LogUtils {
     public static boolean isLogEnable = true;
 
+    public LogUtils(boolean isEnabled){
+        isLogEnable = isEnabled;
+    }
+
     public static void errorLog(String tag, String msg)
     {
         if(isLogEnable)
