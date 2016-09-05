@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         String current_day = CalendarUtils.getDateinPattern(CalendarUtils.DATE_FORMAT_WITH_COMMA);
         LogUtils.infoLog(TAG , current_day);
 
-        String dateinReqFormat = CalendarUtils.getDateinPattern("2016-09-05", CalendarUtils.DATE_TIME_FORMAT1, CalendarUtils.DATE_FORMAT_WITH_COMMA);
+        String dateinReqFormat = CalendarUtils.getDateinPattern("2016-09-05", CalendarUtils.DATE_FORMAT1, CalendarUtils.DATE_FORMAT_WITH_COMMA);
         LogUtils.infoLog(TAG , dateinReqFormat);
 
         LogUtils.debugLog(TAG, "" + ValidationUtils.validatePhoneNumber("903030303407"));
