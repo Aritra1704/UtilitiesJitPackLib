@@ -12,15 +12,21 @@ import android.support.v4.app.ActivityCompat;
  */
 public class PermissionUtils {
 
-    public int checkPermission(Context context){
-        int hasLocationPermission = 0;
+    public int checkPermission(Context context, String[] requestPermission){
+        int hasPermission = 0;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            hasLocationPermission = context.checkSelfPermission( Manifest.permission.ACCESS_FINE_LOCATION );
-            if( hasLocationPermission == PackageManager.PERMISSION_GRANTED ) {
-                hasLocationPermission = context.checkSelfPermission( Manifest.permission.ACCESS_COARSE_LOCATION );
+            for (int i = 0; i < requestPermission.length; i++) {
+                hasPermission = context.checkSelfPermission(requestPermission[i]);
+                if (hasPermission != PackageManager.PERMISSION_GRANTED) {
+                    break;
+                }
             }
         }
-        return hasLocationPermission;
+//            hasPermission = context.checkSelfPermission( Manifest.permission.ACCESS_FINE_LOCATION );
+//            if(hasPermission == PackageManager.PERMISSION_GRANTED ) {
+//                hasPermission = context.checkSelfPermission( Manifest.permission.ACCESS_COARSE_LOCATION );
+//            }
+        return hasPermission;
     }
 
     public void verifyLocation(Context context, String[] requestedPermission){

@@ -33,7 +33,7 @@ public class LogUtils {
             Log.i(tag, msg);
     }
 
-    public static void debug(String tag, String msg)
+    public static void debugLog(String tag, String msg)
     {
         if(isLogEnable)
             Log.d(tag, msg);
