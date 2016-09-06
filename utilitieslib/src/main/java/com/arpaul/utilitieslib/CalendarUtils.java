@@ -48,6 +48,24 @@ public class CalendarUtils {
     }
 
     /**
+     * Get your provided time in millis in required format.
+     * @param time
+     * @param toPattern
+     * @return
+     */
+    public static String getDatefromTimeinMilliesPattern(long time, String toPattern) {
+        String reqDate = "";
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(toPattern);
+        reqDate = simpleDateFormat.format(calendar.getTime());
+
+        return reqDate;
+    }
+
+    /**
      * Get your provided date in required format.
      * @param dateTime
      * @param fromPattern
