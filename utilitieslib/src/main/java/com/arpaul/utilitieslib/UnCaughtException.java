@@ -22,15 +22,16 @@ import java.util.Locale;
  * Created by Aritra on 4/26/2016.
  */
 public class UnCaughtException implements Thread.UncaughtExceptionHandler {
-    private static final String RECIPIENT = "bug.param@gmail.com";
+    private String RECIPIENT = "aritra1704@gmail.com";
     private Thread.UncaughtExceptionHandler previousHandler;
     private Context context;
     private static Context context1;
     private  String appName;
 
-    public UnCaughtException(Context ctx, String s, String appName) {
+    public UnCaughtException(Context ctx, String recipient, String appName) {
         context = ctx;
         context1 = ctx;
+        this.RECIPIENT = recipient;
         this.appName = appName;
     }
 
