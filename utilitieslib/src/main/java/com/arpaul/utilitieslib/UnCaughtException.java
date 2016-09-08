@@ -123,7 +123,7 @@ public class UnCaughtException implements Thread.UncaughtExceptionHandler {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                                    String subject = "Param Solutions Log.";
+                                    String subject = appName + " Log.";
                                     StringBuilder body = new StringBuilder("");
                                     body.append(errorContent).append('\n').append('\n');
                                     sendIntent.setType("message/rfc822");
@@ -138,9 +138,7 @@ public class UnCaughtException implements Thread.UncaughtExceptionHandler {
                     builder.setMessage("Sorry for inconvenience. " + appName + " app stopped working.");
                     builder.show();
                     Looper.loop();
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
