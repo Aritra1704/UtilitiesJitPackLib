@@ -18,6 +18,8 @@ public class CalendarUtils {
     public static final String DATE_FORMAT1 = "yyyy-MM-dd";
     public static final String TIME_FORMAT = "hh:mm aa";
     public static final String TIME_SEC_FORMAT = "hh:mm:ss a";
+    public static final String TIME_HOUR_MINUTE = "hh:mm";
+    public static final String TIME_MINUTE = "mm";
     public static final String WEEKNAME_FORMAT = "EEE";
     public static final String MONTHNAME_FORMAT = "MMM";
     public static final String MONTHNAME_FORMAT1 = "MMMM";
