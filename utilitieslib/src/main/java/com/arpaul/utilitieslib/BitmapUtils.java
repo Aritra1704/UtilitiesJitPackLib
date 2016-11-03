@@ -142,4 +142,16 @@ public class BitmapUtils {
         }
         return 0;
     }
+
+    public static Bitmap getBitmapfromFile(String sdcardPath, String fileName) {
+        File image = new File(sdcardPath, fileName);
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+        return bitmap;
+    }
+
+    public static Bitmap getBitmapfromFile(String sdcardPath, String fileName, int reqWidth, int reqHeight) {
+        File image = new File(sdcardPath, fileName);
+        return decodeSampledBitmapFromResource(image, reqWidth, reqHeight);
+    }
 }

@@ -13,18 +13,15 @@ import java.nio.channels.FileChannel;
  * Created by Aritra on 5/13/2016.
  */
 public class FileUtils {
-    public static File SaveInputStreamAsFile(InputStream inputStream, String fileName, String SdcardPath) {
+    public static File SaveInputStreamAsFile(InputStream inputStream, String SdcardPath, String fileName) {
 
         File themeFile = new File(SdcardPath);
-        try
-        {
-            if(!themeFile.exists())
-            {
-                new File(SdcardPath).mkdirs();
+        try {
+            if(!themeFile.exists()) {
+                new File(SdcardPath).mkdir();
             }
             File file =new File(SdcardPath + fileName);
-            if(file.exists())
-            {
+            if(file.exists()) {
                 file.delete();
             }
 
@@ -39,9 +36,7 @@ public class FileUtils {
             bos.close();
             fos.close();
             bis.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             return themeFile;
