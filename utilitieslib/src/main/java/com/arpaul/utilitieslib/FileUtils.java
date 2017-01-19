@@ -13,12 +13,20 @@ import java.nio.channels.FileChannel;
  * Created by Aritra on 5/13/2016.
  */
 public class FileUtils {
-    public static File SaveInputStreamAsFile(InputStream inputStream, String SdcardPath, String fileName) {
+
+    /**
+     * Saves inputstream into files.
+     * @param inputStream
+     * @param SdcardPath
+     * @param fileName
+     * @return
+     */
+    public static File saveInputStreamAsFile(InputStream inputStream, String SdcardPath, String fileName) {
 
         File themeFile = new File(SdcardPath);
         try {
             if(!themeFile.exists()) {
-                new File(SdcardPath).mkdir();
+                new File(SdcardPath).mkdirs();
             }
             File file =new File(SdcardPath + fileName);
             if(file.exists()) {
@@ -26,7 +34,7 @@ public class FileUtils {
             }
 
             BufferedInputStream bis = new BufferedInputStream(inputStream);
-            FileOutputStream fos = new FileOutputStream(SdcardPath+fileName);
+            FileOutputStream fos = new FileOutputStream(file);
             BufferedOutputStream bos = new BufferedOutputStream(fos);
             byte byt[] = new byte[1024];
             int noBytes;
@@ -67,6 +75,19 @@ public class FileUtils {
                 }
             }
         }
+    }
+
+    /**
+     * Deletes all files in a directory
+     * @param fileOrDirectory
+     */
+    public static void deleteRecursive(File fileOrDirectory) {
+
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
     }
 
 }
