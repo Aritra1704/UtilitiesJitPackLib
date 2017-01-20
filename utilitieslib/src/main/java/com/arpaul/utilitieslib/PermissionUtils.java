@@ -22,14 +22,10 @@ public class PermissionUtils {
                 }
             }
         }
-//            hasPermission = context.checkSelfPermission( Manifest.permission.ACCESS_FINE_LOCATION );
-//            if(hasPermission == PackageManager.PERMISSION_GRANTED ) {
-//                hasPermission = context.checkSelfPermission( Manifest.permission.ACCESS_COARSE_LOCATION );
-//            }
         return hasPermission;
     }
 
-    public void verifyLocation(Context context, String[] requestedPermission){
+    public void verifyPermission(Context context, String[] requestedPermission){
         ActivityCompat.requestPermissions((Activity) context, requestedPermission,1);
     }
 }
