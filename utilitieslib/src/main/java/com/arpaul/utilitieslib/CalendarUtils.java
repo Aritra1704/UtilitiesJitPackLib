@@ -191,4 +191,31 @@ public class CalendarUtils {
         }
         return dateObj;
     }
+
+    /**
+     * Get Time in required timezone.
+     * @param dateTime
+     * @param fromPattern
+     * @param fromTimeZone
+     * @param toTimeZone
+     * @return
+     */
+    public static String getTimeInTimeZone(String dateTime, String fromPattern, String fromTimeZone, String toTimeZone) {
+        String result = "";
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(fromPattern);
+            simpleDateFormat.setTimeZone(TimeZone.getTimeZone(fromTimeZone));
+            Date date = simpleDateFormat.parse(dateTime);
+
+            TimeZone destTz = TimeZone.getTimeZone(toTimeZone);
+            simpleDateFormat.setTimeZone(destTz);
+            result = simpleDateFormat.format(date);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            return result;
+        }
+    }
 }
