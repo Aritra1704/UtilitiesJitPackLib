@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION}) != 0){
 
-            new PermissionUtils().verifyLocation(this,new String[]{
+            new PermissionUtils().verifyPermission(this,new String[]{
                     android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION});
         } else {

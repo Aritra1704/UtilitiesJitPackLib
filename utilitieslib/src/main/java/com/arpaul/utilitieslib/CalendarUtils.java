@@ -219,4 +219,14 @@ public class CalendarUtils {
             return result;
         }
     }
+
+    /**
+     * Get current timezone in short format.
+     * @return
+     */
+    public static String getCurrentTimeZone() {
+        Calendar cal = Calendar.getInstance();
+        TimeZone tz = cal.getTimeZone();
+        return tz.getDisplayName(false, TimeZone.SHORT);
+    }
 }

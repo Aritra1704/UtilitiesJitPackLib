@@ -15,7 +15,7 @@ In build.gradle (Project)
 And then in the other gradle file(may be your app gradle or your own module library gradle, but never add in both of them to avoid conflict.)
 	
 	 dependencies {
-	        compile 'com.github.Aritra1704:UtilitiesJitPackLib:1.17'
+	        compile 'com.github.Aritra1704:UtilitiesJitPackLib:1.18'
 	 }
 
 
