@@ -12,8 +12,14 @@ import android.support.v4.app.ActivityCompat;
  */
 public class PermissionUtils {
 
+    /**
+     * Checks runtime permission if user have already provided it.
+     * @param context
+     * @param requestPermission
+     * @return
+     */
     public int checkPermission(Context context, String[] requestPermission){
-        int hasPermission = 0;
+        int hasPermission = PackageManager.PERMISSION_DENIED;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (int i = 0; i < requestPermission.length; i++) {
                 hasPermission = context.checkSelfPermission(requestPermission[i]);
@@ -25,7 +31,22 @@ public class PermissionUtils {
         return hasPermission;
     }
 
-    public void verifyPermission(Context context, String[] requestedPermission){
+    /**
+     * Requests runtime permission.
+     * @param context
+     * @param requestedPermission
+     */
+    public void requestPermission(Context context, String[] requestedPermission){
         ActivityCompat.requestPermissions((Activity) context, requestedPermission,1);
+    }
+
+    /**
+     * Requests runtime permission with request code for easy travesal
+     * @param context
+     * @param requestedPermission
+     * @param requestCode
+     */
+    public void requestPermission(Context context, String[] requestedPermission, int requestCode){
+        ActivityCompat.requestPermissions((Activity) context, requestedPermission, requestCode);
     }
 }
