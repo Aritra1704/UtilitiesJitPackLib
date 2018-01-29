@@ -69,6 +69,19 @@ public class CalendarUtils {
     }
 
     /**
+     * Get Time in Millis
+     * @param dateTime
+     * @param fromPattern
+     * @return
+     */
+    public static long getTimeinMilliesPattern(String dateTime, String fromPattern) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(CalendarUtils.getDateFromString(dateTime, fromPattern));
+
+        return calendar.getTimeInMillis();
+    }
+
+    /**
      * Get your provided date in required format.
      * @param dateTime
      * @param fromPattern
