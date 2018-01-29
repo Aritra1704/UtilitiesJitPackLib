@@ -207,6 +207,34 @@ public class CalendarUtils {
     }
 
     /**
+     * Get different TimeZone format in required timezone.
+     * For eg. Actual: 2016-11-01T23:59:00-04:00 to Final: 2016-11-01T16:59:00-1100
+     * Eg. fromPattern: "yyyy-MM-dd'T'HH:mm:ssZ"
+     * Eg. toTimeZone; Use method getCurrentTimeZone()
+     * @param dateTime
+     * @param fromPattern
+     * @param toTimeZone
+     * @return
+     */
+    public static String getTimeInTimeZone(String dateTime, String fromPattern, String toTimeZone) {
+        String result = "";
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(fromPattern);
+            Date date = simpleDateFormat.parse(dateTime);
+
+            TimeZone destTz = TimeZone.getTimeZone(toTimeZone);
+            simpleDateFormat.setTimeZone(destTz);
+            result = simpleDateFormat.format(date);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            return result;
+        }
+    }
+
+    /**
      * Get Time in required timezone.
      * @param dateTime
      * @param fromPattern

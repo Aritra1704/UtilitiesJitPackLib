@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
 //
 //        LogUtils.debugLog(TAG, "" + ValidationUtils.validatePhoneNumber("903030303407"));
 
+        String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssZ";
+        LogUtils.infoLog("TimeZone", CalendarUtils.getTimeInTimeZone("2016-11-01T23:59:00-04:00", DATE_PATTERN, CalendarUtils.getCurrentTimeZone()));
+
         findViewById(R.id.btnInternetSpeed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
